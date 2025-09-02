@@ -1,32 +1,121 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hello Abudi</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      color: white;
-    }
-    h1 {
-      font-size: 3rem;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-      animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  <title>Abudi • Hello</title>
+  <meta name="description" content="A tiny, modern landing page deployed via GitHub Pages." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Ccircle cx='64' cy='64' r='62' fill='%2300d2ff'/%3E%3Ctext x='50%' y='54%' font-family='Arial' font-size='56' text-anchor='middle' fill='white'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>✨ Hello Abudi, Welcome Back! ✨</h1>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00d2ff"/><stop offset="1" stop-color="#3a7bd5"/></linearGradient></defs><rect rx="6" width="24" height="24" fill="url(#g)"/></svg>
+        <span>Abudi</span>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container hero-inner">
+        <div class="glass card">
+          <h1>Hello World, Abudi 👋</h1>
+          <p class="subtitle">
+            A minimal, modern starter shipped with GitHub Actions → GitHub Pages.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#features">Explore</a>
+            <a class="btn" href="https://abudi7.github.io/abudci/" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+      <div class="container">
+        <h2 class="section-title">Why this template?</h2>
+        <div class="grid">
+          <article class="card feature">
+            <div class="icon">⚡</div>
+            <h3>Fast & Lightweight</h3>
+            <p>No frameworks, no build step — just HTML/CSS with tiny JS.</p>
+          </article>
+          <article class="card feature">
+            <div class="icon">🎨</div>
+            <h3>Modern Design</h3>
+            <p>Gradient hero, glassmorphism, soft shadows, and nice motion.</p>
+          </article>
+          <article class="card feature">
+            <div class="icon">🌗</div>
+            <h3>Dark Mode</h3>
+            <p>Respects system theme + manual toggle with localStorage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section muted">
+      <div class="container about">
+        <div>
+          <h2 class="section-title">About the project</h2>
+          <p>
+            This is a tiny starter for static sites. Edit <code>index.html</code> and <code>style.css</code>,
+            push to <code>main</code>, and GitHub Actions redeploys automatically.
+          </p>
+        </div>
+        <div class="code card">
+<pre><code>git add -A
+git commit -m "update: hero & features"
+git push origin main</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span id="year"></span> Abudi • Deployed with GitHub Pages</span>
+      <a href="#top" class="back-to-top">↑ Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle (auto → light/dark)
+    const root = document.documentElement;
+    const key = 'theme';
+    const saved = localStorage.getItem(key);
+    if (saved) root.setAttribute('data-theme', saved);
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'auto';
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem(key, next);
+      // Swap icon
+      const btn = document.getElementById('themeToggle');
+      btn.textContent = next === 'dark' ? '🌙' : '🌞';
+    });
+
+    // Initialize icon based on theme
+    (function () {
+      const mode = root.getAttribute('data-theme');
+      document.getElementById('themeToggle').textContent = mode === 'dark' ? '🌙' : '🌞';
+    })();
+  </script>
 </body>
 </html>
